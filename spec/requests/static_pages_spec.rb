@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe "Static pages" do
 
+  let(:base_title) {"Whizcollab"}
+
   describe "Home page" do
 
     it "should have the content 'Whizcollab'" do
@@ -9,10 +11,14 @@ describe "Static pages" do
       page.should have_content('Whizcollab')
     end
 
-    it "should have the title 'Home'" do
+    it "should have the base title" do
       visit '/static_pages/home'
       page.should have_selector('title',
-      :text => "Whizcollab | Home")
+      :text => "Whizcollab")
+    end
+    it "should not have a custom page title" do
+      visit '/static_pages/home'
+      page.should_not have_selector('title', :text => ' | Home')
     end
   end
 
@@ -27,7 +33,7 @@ describe "Static pages" do
     it "should have the title 'Help'" do
       visit '/static_pages/help'
       page.should have_selector('title',
-        :text => "Whizcollab | Help")
+        :text => "#{base_title} | Help")
     end
   end
 
@@ -41,7 +47,7 @@ describe "Static pages" do
     it "should have the title 'About Us'" do
       visit '/static_pages/about'
       page.should have_selector('title',
-        :text => "Whizcollab | About Us")
+        :text => "#{base_title} | About Us")
     end
   end
 
