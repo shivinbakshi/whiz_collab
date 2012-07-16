@@ -33,11 +33,6 @@ describe "Authentication" do
         fill_in "Password", with: user.password
         click_button "Sign in"
 
-        describe "followed by signout" do
-        before { click_link "Sign out" }
-        it { should have_link('Sign in') }
-      end
-        
       end
 
       it { should have_selector('title', text: user.name) }
